@@ -1,0 +1,26 @@
+{% if the_post.thumbnail.src and (not post_is_attachment) %}
+<figure id="attachment_{{ the_post.thumbnail.id }}"{% if (show_caption and the_post.thumbnail.caption ) %} aria-describedby="figcaption_attachment_{{ the_post.thumbnail.id }}"{% endif %} class="{{ figure_class }}" itemprop="image" itemscope="" itemtype="http://schema.org/ImageObject">
+	{% if (hide_link) %}{% else %}<a href="{{ the_post.link|e('esc_url')}}" title="{{ the_post.title }}">{% endif %}{{function('wp_get_attachment_image', the_post.thumbnail.id, image_size, false, 'class='~img_class~'&data-responsive-image-type='~responsive_image_type)}}{% if (hide_link) %}{% else %}</a>{% endif %}
+	{% if (show_caption and the_post.thumbnail.caption ) or (show_source and the_post.thumbnail.get_field('source-title')) %}
+	<figcaption id="figcaption_attachment_{{ the_post.thumbnail.id }}" class="c-figure__caption wp-caption-text" itemprop="description">
+		{% if (show_source and the_post.thumbnail.get_field('source-title')) %}<span class="caption--source">Bild: {% if the_post.thumbnail.get_field('source-link') %}<a href="{{ the_post.thumbnail.get_field('source-link') }}" target="_blank">{% endif %}{{ the_post.thumbnail.get_field('source-title')|e('esc_html') }}{% if the_post.thumbnail.get_field('source-link') %}</a>{% endif %}</span>{% endif %}
+	</figcaption>
+	{% endif %}
+	<meta itemprop="url" content="{{ the_post.wp_get_attachment_image_src( 'full', img_class, the_post.thumbnail.id, false ).url }}">
+    <meta itemprop="width" content="{{ the_post.wp_get_attachment_image_src( 'full', img_class, the_post.thumbnail.id, false ).width }}">
+	<meta itemprop="height" content="{{ the_post.wp_get_attachment_image_src( 'full', img_class, the_post.thumbnail.id, false ).height }}">
+</figure>
+{% elseif (the_post.src and post_is_attachment) or the_post.post_type == 'attachment' %}
+<!-- 2 -->
+<figure id="attachment_{{ the_post.id }}"{% if (show_caption and the_post.thumbnail.caption ) %} aria-describedby="figcaption_attachment_{{ the_post.id }}"{% endif %} class="{{ figure_class }}" itemscope="" itemtype="http://schema.org/ImageObject">
+	{% if (hide_link) %}{% else %}<a href="{{ the_post.link|e('esc_url')}}" title="{{ the_post.title }}">{% endif %}{{function('wp_get_attachment_image', the_post.id, image_size, false, 'class='~img_class~'&data-responsive-image-type='~responsive_image_type)}}{% if (hide_link) %}{% else %}</a>{% endif %}
+	{% if (show_caption and the_post.thumbnail.caption ) or (show_source and the_post.get_field('source-title')) %}
+	<figcaption id="figcaption_attachment_{{ the_post.id }}" class="c-figure__caption wp-caption-text" itemprop="description">
+		{% if (show_source and the_post.get_field('source-title')) %}<span class="caption--source">Bild: {% if the_post.get_field('source-link') %}<a href="{{ the_post.get_field('source-link') }}" target="_blank">{% endif %}{{ the_post.get_field('source-title')|e('esc_html') }}{% if the_post.get_field('source-link') %}</a>{% endif %}</span>{% endif %}
+	</figcaption>
+	{% endif %}
+	<meta itemprop="url" content="{{ the_post.src }}">
+    <meta itemprop="width" content="{{ the_post.width }}">
+	<meta itemprop="height" content="{{ the_post.height }}">
+</figure>
+{% endif %}

@@ -1,0 +1,7 @@
+<form role="search" method="get" id="searchform" class="searchform clearfix" action="{{site.link}}">
+  <div>
+    <label class="sr-only" for="s">Suchformular</label>
+    <input class="searchform__input form-control input-sm" type="text" value="{{ function('get_search_query') }}" placeholder="Suchbegriff eingeben" name="s" id="s" />
+    <button class="searchform__button btn btn-sm" type="submit" id="searchsubmit"><img class="searchform__icon" src="{{ site.theme.link }}/src/img/icon-suche.png"></button>
+  </div>
+</form>

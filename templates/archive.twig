@@ -1,0 +1,15 @@
+{# This file demonstrates using most of the index.twig template and modifying 
+   just a small part. See `search.twig` for an example of another approach #}
+
+{% extends "index.twig" %}
+
+{% block content %}
+
+  	<div class="tease__meta archive__meta">
+	Archiv für
+	</div>
+	<h1 class="list__headline archive__headline">{{title}}</h1>
+	
+	
+  {{ parent() }}
+{% endblock %}

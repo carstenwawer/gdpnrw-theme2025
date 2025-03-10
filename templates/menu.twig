@@ -1,0 +1,46 @@
+{% if menu %}
+	<ul class="nav navbar-nav">
+	{% for item in menu %}
+
+		{% if item.get_children is not empty %}
+			{% set submenu = true %}
+		{% else %}
+			{% set submenu = false %}
+		{% endif %}
+
+		<li class="{{item.classes | join(' ')}}{% if submenu %} dropdown{% endif %}">
+			<a
+				href="{{item.link}}"
+				target="{{ item.target }}"
+				{% if submenu %}
+					class="dropdown-toggle"
+					data-toggle="dropdown"
+					role="button"
+					aria-haspopup="true"
+					aria-expanded="false"
+				{% endif %}
+			>
+				{{item.title}}
+				{% if submenu %}<span class="caret"></span>{% endif %}
+			</a>
+			{% if submenu %}
+				{% include "dropdown-menu.twig" with {'menu': item.get_children} %}
+			{% endif %}
+		</li>
+	{% endfor %}
+	</ul>
+	<div class="mobile-meta">
+		<form role="search" method="get" id="searchform" class="searchform clearfix" action="{{site.link}}">
+		  <div>
+		    <label class="sr-only" for="s">Suchformular</label>
+		    <input class="searchform__input input-sm form-control" type="text" value="{{ function('get_search_query') }}" placeholder="Suchbegriff eingeben" name="s" id="s" />
+		    <button class="searchform__button btn btn-sm" type="submit" id="searchsubmit"><img class="searchform__icon" src="{{ site.theme.link }}/src/img/icon-suche.png"></button>
+		  </div>
+		</form>
+		
+		<div class="mobile-mitglieder">
+			<a href="{% if options.login_url %}{{ options.login_url }}{% else %}https://www.gdp.de/nrw/de/login{% endif %}" class="btn btn-sm btn-primary" title="Login">Login</a>
+			<a href="{% if options.member_form_url %}{% if options.member_form_url == 'https://www.gdp.de/gdp/gdpnrw.nsf/id/DE_83GKMM_Mitglied_werden' %}https://www.gdp.de/nrw/de/service/mitgliedsantrag-online/{% else %}{{ options.member_form_url }}{% endif %}{{ options.member_form_url }}{% else %}https://www.gdp.de/nrw/de/service/mitgliedsantrag-online{% endif %}" class="btn btn-sm btn-secondary" title="Login">Mitglied werden</a>
+		</div>
+	</div>
+{% endif %}

@@ -1,0 +1,15 @@
+						<section class="aside aside--white nrw-news">
+							{% for post in nrw_posts %}
+							{% if loop.first %}{% if post.thumbnail %}{% include 'feature_image.twig' with { 'the_post' : post, 'image_size': 'large', 'figure_class': 'c-sheet__figure animate order--5 fadeIn', 'img_class' : 'tease__image article__image img-responsive', 'show_caption': true, 'show_source': true, 'hide_link': true, 'responsive_image_type': 'feature_image' } %}{% else %}<img class="aside__feature-image nrw-news__feature-image img-responsive" src="{{ site.theme.link }}/src/img/platzhalter.jpg">{% endif %}
+							{% endif %}
+							<article class="aside__feature nrw-news__item">
+								<div class="aside__text nrw-news__text">
+									<a title="{{ post.post_title|e('html_attr') }}" href="{{ site.link }}/nrw-presse/{{ post.post_name|e('html_attr') }}/">
+										<div class="aside__meta nrw-news__meta">GdP NRW, {{ post.post_date|date('d.m.Y') }}</div>
+										<h1 class="aside__headline nrw-news__headline">{{ post.post_title }}</h1>
+									</a>
+								</div>
+							</article>
+							{% endfor %}
+							<a target="_blank" class="aside__cta nrw-news__cta" href="https://www.gdp.de/gdp/gdpnrw.nsf/id/Pressemitteilungen" title="Alle Meldungen der GdP NRW"><span>Meldungen aus dem Landesbezirk NRW</span></a>
+						</section>

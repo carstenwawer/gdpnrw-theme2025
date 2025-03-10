@@ -1,0 +1,36 @@
+{
+  "name": "gdpnrw-theme",
+  "version": "1.0.0",
+  "description": "The \"_s\" for Timber: a dead-simple theme that you can build from. The primary purpose of this theme is to provide a file structure rather than a framework for markup or styles. Configure your Sass, scripts, and task runners however you would like!",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "bootstrap-sass": "^3.4.1",
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "gulp": "^4.0.1",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-clean": "latest",
+    "gulp-cli": "^2.2.0",
+    "gulp-concat": "latest",
+    "gulp-csso": "latest",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-livereload": "^4.0.1",
+    "gulp-load-plugins": "^1.6.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git-codecommit.eu-central-1.amazonaws.com/v1/repos/gdpnrw-theme"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,21 @@
+{% extends "tease.twig" %}
+
+{% block content %}
+		<a href="{{post.link}}" title="{{post.title}}" class="tease__image">
+			{% include 'feature_image.twig' with { 'the_post' : post, 'image_size': 'large', 'figure_class': 'c-sheet__figure animate order--5 fadeIn', 'img_class' : 'tease__image article__image img-responsive', 'show_caption': true, 'show_source': true, 'hide_link': false, 'responsive_image_type': 'feature_image' } %}
+		</a>
+	
+	<div class="tease__box">
+		<div class="tease__meta">
+		{% for term in post.terms('category') %}
+			<a title="{{ term.name|e('esc_html') }}" href="{{ term.link|e('esc_url')}}">{{ term.name|e('esc_html') }}</a>				
+		{% endfor %}	
+	
+			<time itemprop="datePublished" datetime="{{ post.post_date|date('c') }}">{{ post.post_date|date('d. F Y') }}</time>
+		</div>
+		
+		<h1 class="h1 tease__headline"><a href="{{post.link}}" title="{{post.title}}">{{post.title}}</a></h1>
+		<p class="tease__text">{{ post.get_preview(40, false, null, true) }}</p>
+		<a href="{{post.link}}" title="{{post.title}}" class="btn btn-sm btn-primary">Weiterlesen</a>
+	</div>
+{% endblock %}

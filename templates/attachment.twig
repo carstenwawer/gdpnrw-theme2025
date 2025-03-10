@@ -1,0 +1,42 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<div class="content-wrapper">
+		<article class="article post-type-{{ post.post_type }}" id="post-{{ post.ID }}">
+						
+			{% include 'feature_image.twig' with { 'the_post' : post, 'image_size': 'large', 'figure_class': 'c-sheet__figure animate order--5 fadeIn', 'img_class' : 'tease__image article__image img-responsive', 'show_caption': true, 'show_source': true, 'hide_link': true, 'responsive_image_type': 'feature_image' } %}
+			
+			<div class="tease__box">
+				<div class="tease__meta article__meta">
+				{% for term in post.terms('category') %}
+					<a title="{{ term.name|e('esc_html') }}" href="{{ term.link|e('esc_url')}}">{{ term.name|e('esc_html') }}</a>				
+				{% endfor %}	
+			
+					<time itemprop="datePublished" datetime="{{ post.post_date|date('c') }}">{{ post.post_date|date('d. F Y') }}</time>
+				</div>
+				
+				<h1 class="h1 tease__headline article__headline">{{post.title}}</h1>
+	
+			{% if(post.post_excerpt) %}<p class="article__teaser-text" itemprop="description">{{ post.post_excerpt|e('esc_html') }}</p>{% endif %}
+			
+			</div>
+			
+			<div class="article__ce">
+				{{post.content}}
+			</div>
+			
+{#
+			<div class="article__tags">
+				{% for term in post.terms('tags') %}
+					<a title="{{ term.name|e('esc_html') }}" href="{{ term.link|e('esc_url')}}">{{ term.name|e('esc_html') }}</a>				
+				{% endfor %}
+			</div>
+#}
+			
+			<div class="article__sharer">
+				{% include 'partial/sharer.twig' %}
+			</div>
+
+		</article>
+	</div><!-- /content-wrapper -->
+{% endblock %}

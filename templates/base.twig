@@ -1,0 +1,100 @@
+{% block html_head_container %}
+
+{% include 'html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+	</head>
+{% endblock %}
+
+	<body class="{{body_class}}" data-template="base.twig">
+		<a class="sr-only" href="#content">{{ _e( 'Skip to content') }}</a>
+		
+		<header class="header" >
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						{% block header %}
+						
+						<div class="stern">
+							<a href="{{site.url}}" title="zur Startseite: Gewerkschaft der Polizei – {{site.name|e('esc_html')}}">
+								<img src="{{ site.theme.link }}/src/img/gdp-stern.png">
+							</a>
+						</div>
+						
+							<div class="wrapper">
+								
+								<div class="mitglieder">
+									<a href="{% if options.login_url %}{{ options.login_url }}{% else %}https://www.gdp.de/nrw/de/login{% endif %}" target="_blank" class="btn btn-sm btn-primary" title="Login">Login</a>
+									<a href="{% if options.member_form_url %}{% if options.member_form_url == 'https://www.gdp.de/gdp/gdpnrw.nsf/id/DE_83GKMM_Mitglied_werden' %}https://www.gdp.de/nrw/de/service/mitgliedsantrag-online/{% else %}{{ options.member_form_url }}{% endif %}{% else %}https://www.gdp.de/nrw/de/service/mitgliedsantrag-online{% endif %}" target="_blank" class="btn btn-sm btn-secondary" title="Login">Mitglied werden</a>
+								</div>
+								
+								<div class="suche">
+									{% include 'searchform.twig' %}
+								</div>
+								
+								
+								<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#hauptmenu" aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+									<span class="icon-bar"></span>
+								</button>
+									
+								<div class="absender">
+									<h1>Gewerkschaft der Polizei <span class="seitenname">{{site.name}}</span></h1>
+								</div>
+	
+								<nav class="navbar collapse navbar-collapse" id="hauptmenu">
+									{% include "menu.twig" with {'menu': menu.get_items} %}
+								</nav><!-- /.navbar-collapse -->
+
+							</div>
+						{% endblock %}
+					</div>
+				</div>
+			</div>
+			
+			<div class="gdp-linie">
+				<div class="gdp-linie__stern"></div>
+				<div class="gdp-linie__nrw">
+					<div class="gdp-linie__weiss"></div>
+					<div class="gdp-linie__rot"></div>
+				</div>
+			</div>
+		</header>
+				
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7">
+					<section id="content" role="main" class="content-wrapper">	
+						<div class="wrapper {{sidebar_class}}">
+							{% block content %}
+								Sorry, no content
+							{% endblock %}
+						</div>
+					</section>
+				</div>
+				<div class="col-md-5">
+				
+					<aside class="sidebar">
+					
+						{# Sidebar Element für die Meldungen der gdp-nrw.de #}
+						{{ nrw_news_box }}
+						
+						{% if dynamic_sidebar %}
+							{{dynamic_sidebar}}
+						{% endif %}
+					</aside>
+				</div>
+			</div>
+		</div>
+
+		{% block footer %}
+			<footer id="footer">
+				{% include 'footer.twig' %}
+			</footer>
+			{{ function('wp_footer') }}
+		{% endblock %}
+	</body>
+</html>
